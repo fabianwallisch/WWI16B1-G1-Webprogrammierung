@@ -23,16 +23,20 @@
 </head>
 
 <body ng-app="adressbuchApp">
-	<header>
-		<h1>Adressbuch</h1>
-		<nav>
-			<a href="#!/">Übersicht</a>
-			<a href="#!/add">Adresse hinzufügen</a>
-		</nav>
-	</header>
-	<main ng-view class="view">
+	<nav class="navbar navbar-light bg-light">
+		<a href="#!/" class="navbar-brand">Adressbuch</a>
+		<a class="nav-link" href="#!/">Übersicht</a>
+		<a class="nav-link" href="#!/add">Adresse hinzufügen</a>
+	</nav>
 
+	<main ng-view class="view container mt-3">
 	</main>
+	
+	<nav class="navbar fixed-bottom navbar-light bg-light">
+		<a class="navbar-brand" href="#">Initiative Gegen Emojis in Folien</a>
+		<a class="nav-link" href="https://github.com/fabianwallisch/WWI16B1-G1-Webprogrammierung/tree/master/portfoliopruefung_02"
+		 target="_blank">GitHub</a>
+	</nav>
 </body>
 
 </html>
