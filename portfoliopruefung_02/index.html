@@ -1,0 +1,34 @@
+<html>
+
+<head>
+	<title>Adressbuch</title>
+	<meta charset="utf-8">
+
+	<link href="css/style.css">
+
+	<script src="scripts/angular/angular.js"></script>
+	<script src="scripts/angular/angular-route.js"></script>
+	<script src="scripts/app.module.js"></script>
+	<script src="scripts/app.config.js"></script>
+	<script src="scripts/add/add.module.js"></script>
+	<script src="scripts/add/add.component.js"></script>
+	<script src="scripts/edit/edit.module.js"></script>
+	<script src="scripts/edit/edit.component.js"></script>
+	<script src="scripts/list/list.module.js"></script>
+	<script src="scripts/list/list.component.js"></script>
+	<script src="scripts/contact/contact.module.js"></script>
+	<script src="scripts/contact/contact.service.js"></script>
+</head>
+
+<body ng-app="adressbuchApp">
+	<header>
+		<h1>Adressbuch</h1>
+		<nav>
+			<a href="#!/">Übersicht</a>
+			<a href="#!/add">Adresse hinzufügen</a>
+		</nav>
+	</header>
+	<div ng-view></div>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<h2>Kontakt bearbeiten</h2>
+<form ng-submit="save()" ng-show="loaded">
+	<p>Vorname: <input type="text" ng-model="firstname"></p>
+	<p>Nachname: <input type="text" ng-model="lastname"></p>
+	<p>Email: <input type="email" ng-model="email"></p>
+	<p>Telefon: <input type="phone" ng-model="phone"></p>
+	<p><input type="submit" value="Speichern"></p>
+	<p><a href="#!/">Cancel</a></p>
+</form>
+<p ng-hide="loaded">Adresse ist nicht vorhanden</p>
