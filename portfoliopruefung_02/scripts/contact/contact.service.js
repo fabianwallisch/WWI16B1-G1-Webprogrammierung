@@ -3,6 +3,22 @@ angular.module("contact").service("contactService", function(){
 	var contactList = [];
 	var contactId = 1;
 
+	var initLocalStorage = ()=>{
+		var lsList = Array.from(localStorage.getItem("list"));
+		var lsId = Number.parseInt(localStorage.getItem("id"));
+
+		if(lsList !== null)
+			contactList = lsList;
+		
+		if(lsId !== null)
+			contactId = lsId;
+	};
+
+	var saveLocalStorage = ()=>{
+		// localStorage.setItem("list", contactList);
+		// localStorage.setItem("id", contactId);
+	}
+
 	this.getList = ()=>{
 		return contactList;
 	}
@@ -21,6 +37,8 @@ angular.module("contact").service("contactService", function(){
 	this.addContact = (contact)=>{
 		contact.id = contactId++;
 		contactList.push(contact);
+
+		saveLocalStorage();
 	};
 
 	this.updateContact = (contactId, updatedContact)=>{
@@ -33,6 +51,8 @@ angular.module("contact").service("contactService", function(){
 		
 		updatedContact.id = contactId;
 		contactList[index] = updatedContact; 
+
+		saveLocalStorage();
 	};
 
 	this.deleteContact = (contactId)=>{
@@ -50,12 +70,9 @@ angular.module("contact").service("contactService", function(){
 		}
 
 		contactList = newList;
+
+		saveLocalStorage();
 	};
 
-	this.addContact({
-		firstname: "Max",
-		lastname: "Mustermann",
-		email: "abc",
-		phone: 0123456
-	});
+	// initLocalStorage();
 });

@@ -12,7 +12,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="contact in contactList | orderBy:contact.lastname">
+		<tr ng-repeat="contact in contactList | orderBy:'firstname'">
 			<td>{{contact.firstname}}</td>
 			<td>{{contact.lastname}}</td>
 			<td>{{contact.email}}</td>
