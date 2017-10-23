@@ -4,10 +4,11 @@
 	<title>Adressbuch</title>
 	<meta charset="utf-8">
 
-	<link href="css/style.css">
+	<link href="css/style.css" type="text/css" rel="stylesheet">
 
 	<script src="scripts/angular/angular.js"></script>
 	<script src="scripts/angular/angular-route.js"></script>
+	<script src="scripts/angular/angular-animate.js"></script>
 	<script src="scripts/app.module.js"></script>
 	<script src="scripts/app.config.js"></script>
 	<script src="scripts/add/add.module.js"></script>
@@ -28,7 +29,9 @@
 			<a href="#!/add">Adresse hinzufügen</a>
 		</nav>
 	</header>
-	<div ng-view></div>
+	<main ng-view class="view">
+
+	</main>
 </body>
 
 </html>

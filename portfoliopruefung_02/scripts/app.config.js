@@ -6,15 +6,15 @@ angular.module("adressbuchApp").config(
 			$locationProvider.hashPrefix('!');
 
 			$routeProvider.when("/", {
-				template: "<list></list>"
+				template: "<list class='page'></list>"
 			});
 
 			$routeProvider.when("/add", {
-				template: "<add></add>"
+				template: "<add class='page'></add>"
 			});
 
 			$routeProvider.when("/edit/:contactId", {
-				template: "<edit></edit>"
+				template: "<edit class='page'></edit>"
 			});
 
 			$routeProvider.otherwise("/");

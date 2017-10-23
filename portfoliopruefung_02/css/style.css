@@ -1,3 +1,32 @@
-list, add, edit{
-	
+@keyframes slideInRight {
+    from    {left: 100%;}
+    to      {left: 0;}
 }
+
+@keyframes slideOutLeft {
+    to      {left: -100%;}
+}
+
+.ng-enter{
+
+}
+	
+.ng-leave{
+
+}
+
+.view{
+
+}
+
+.page{
+
+}
+
+body{
+
+}
+
+
+
+
