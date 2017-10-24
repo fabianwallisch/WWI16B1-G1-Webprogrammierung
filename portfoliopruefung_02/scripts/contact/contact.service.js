@@ -3,7 +3,7 @@ angular.module("contact").service("contactService", function () {
 	var contactList = [];
 	var contactId = 1;
 
-	var initLocalStorage = () => {
+	var loadLocalStorage = () => {
 		var lsList;
 		var lsId;
 
@@ -44,8 +44,6 @@ angular.module("contact").service("contactService", function () {
 	this.addContact = (contact) => {
 		contact.id = contactId++;
 		contactList.push(contact);
-
-		saveLocalStorage();
 	};
 
 	this.updateContact = (contactId, updatedContact) => {
@@ -58,8 +56,6 @@ angular.module("contact").service("contactService", function () {
 
 		updatedContact.id = contactId;
 		contactList[index] = updatedContact;
-
-		saveLocalStorage();
 	};
 
 	this.deleteContact = (contactId) => {
@@ -77,9 +73,5 @@ angular.module("contact").service("contactService", function () {
 		}
 
 		contactList = newList;
-
-		saveLocalStorage();
 	};
-
-	initLocalStorage();
 });
