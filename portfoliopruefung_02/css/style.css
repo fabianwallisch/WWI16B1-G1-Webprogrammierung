@@ -27,6 +27,57 @@ body{
 
 }
 
+.navbar-nav {
+    display:table;
+    width:100%;
+    margin: 0;
+    font-size: x-large; 
+}
 
+.navbar-nav > a {
+    padding-top:0px; 
+    padding-bottom:0px; 
+}
 
+.navbar-img{
+    height:15px; 
+    padding-bottom: 3px; 
+    padding-right: 2px; 
+}
+
+.nav-text-dark{
+    color: #000; 
+}
+.container{
+    margin-top: 2.5%; 
+}
+
+.card{
+    width: col-md; 
+}
+
+.card-block{
+    padding: 5px; 
+}
+
+.list-img{
+    height:14px; 
+}
+
+thead{
+    font-weight: bold; 
+}
+
+a{
+    color: #000; 
+}
+
+.formularActions{
+    margin-right:5px; 
+    float: right; 
+}
+
+.input-Add{
+    width: 100%;
+}
 

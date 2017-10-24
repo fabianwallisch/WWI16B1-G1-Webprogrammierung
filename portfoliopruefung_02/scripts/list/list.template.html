@@ -1,6 +1,6 @@
 <h2>Übersicht</h2>
 <p ng-show="contactList.length == 0" class="mt-3">Es sind noch keine Adressen vorhanden</p>
-<table ng-show="contactList.length > 0" class="table table-striped mt-3">
+<table  ng-show="contactList.length > 0" class="table table-striped mt-3">
 	<thead>
 		<tr>
 			<th>Vorname</th>
@@ -17,8 +17,8 @@
 			<td>{{contact.lastname}}</td>
 			<td>{{contact.email}}</td>
 			<td>{{contact.phone}}</td>
-			<td><button ng-click="deleteContact(contact.id)">x</button></td>
-			<td><a ng-href="#!/edit/{{contact.id}}">bearbeiten</a></td>
+			<td><a ng-click="deleteContact(contact.id)"><img class="list-img" src="\img\trash.svg" alt="delete"></a></td>
+			<td><a ng-href="#!/edit/{{contact.id}}"><img class="list-img" src="\img\pencil.svg" alt="edit"></a></td>
 		</tr>
 	</tbody>
 </table>
