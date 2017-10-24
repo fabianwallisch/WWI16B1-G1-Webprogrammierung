@@ -74,4 +74,21 @@ angular.module("contact").service("contactService", function () {
 
 		contactList = newList;
 	};
+
+	this.exportData = ()=>{
+		return {
+			contactId: contactId,
+			contactList: contactList
+		};
+	};
+
+	this.importData = (data)=>{
+		contactId = data.contactId;
+		contactList = data.contactList;
+	}
+
+	this.reset = ()=>{
+		contactList = [];
+		contactId = 1;
+	}
 });
