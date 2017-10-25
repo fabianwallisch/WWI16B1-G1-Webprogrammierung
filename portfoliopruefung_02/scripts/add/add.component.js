@@ -67,6 +67,15 @@ angular.module("add").component("add", {
 				$location.path("/");
 				
 			}
+
+			var init = ()=>{
+				var linkOverview = document.getElementById("link-overview")
+				var linkAdd = document.getElementById("link-add");
+	
+				linkOverview.classList.remove("active");
+				linkAdd.classList.add("active");
+			}
+			init();
 		}
 	]
 });

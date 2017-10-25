@@ -25,9 +25,9 @@ angular.module("list").component("list", {
 			</tr>
 		</tbody>
 	</table>
-	<!-- <button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
-	<button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="reset()">zurücksetzen</button>
-	<button class="btn btn-outline-primary" ng-click="import()">Kontakte importieren</button> -->
+	<button ng-click="reset()" ng-show="contactList.length > 0" alt="Alle Adressen löschen" class="btn btn-outline-primary"><span class="oi oi-reload"></span></button>
+	<button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
+	<button class="btn btn-outline-primary" ng-click="import()">Kontakte importieren</button>
 	`,
 	controller: ['contactService', '$scope', (contactService, $scope) => {
 		$scope.contactList = contactService.getList();
@@ -37,60 +37,75 @@ angular.module("list").component("list", {
 		};
 
 		$scope.export = ()=>{
-			// var link = document.createElement("a");
-			// var dataString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contactService.exportData()));
-			// link.setAttribute("href", dataString);
-			// link.setAttribute("download", "adressbuch.json");
-			// link.click();
+			var link = document.createElement("a");
+			var dataString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contactService.exportData()));
+			console.log(dataString);
+			link.setAttribute("href", dataString);
+			link.setAttribute("download", "adressbuch.json");
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
 		};
 
 		$scope.import = ()=>{
-			// if(!confirm("ungespeicherte Daten gehen bei dem Import einer Datei verloren")){
-			// 	return;
-			// }
+			if(!confirm("ungespeicherte Daten gehen bei dem Import einer Datei verloren")){
+				return;
+			}
 
-			// var dialog = document.createElement("input");
-			// dialog.setAttribute("type", "file");
-			// dialog.onchange = (event)=>{
-			// 	var files = dialog.files;
-			// 	var reader = FileReader();
-			// 	reader.onload = (file)=>{
-			// 		return (e)=>{
-			// 			try{
-			// 				var contactJson = JSON.parse(file);
+			var dialog = document.createElement("input");
+			dialog.setAttribute("type", "file");
+			dialog.setAttribute("accept", ".json, text/json");
+			dialog.onchange = (event)=>{
+				var files = dialog.files;
+				var reader = new FileReader();
+				reader.onloadend = (evt)=>{
+					if(evt.target.readyState == FileReader.DONE) {
+						try{
+							var contactJson = JSON.parse(evt.target.result);
 
-			// 				if(!contactJson.contactId || ! contactJson.contactList)
-			// 					throw "JSON Format fehlerhaft";
+							if(!contactJson.contactId || ! contactJson.contactList)
+								throw "JSON Format fehlerhaft";
 							
-			// 				if(!Number.isInteger(contactJson.contactId) || contactJson.contactId < 1)
-			// 					throw "contactId ist fehlerhaft";
+							if(!Number.isInteger(contactJson.contactId) || contactJson.contactId < 1)
+								throw "contactId ist fehlerhaft";
 
-			// 				contactJson.contactList.forEach((element)=>{
-			// 					if(!element.firstname && !element.lastname && !element.email && !element.phone)
-			// 						throw "leere Kontakte vorhanden";
+							contactJson.contactList.forEach((element)=>{
+								if(!element.firstname && !element.lastname && !element.email && !element.phone)
+									throw "leere Kontakte vorhanden";
 				
-			// 					if(element.firstname.length == 0 && element.lastname.length == 0 && element.email.length == 0 && element.phone.length == 0)
-			// 						throw "leerer Kontakt vorhanden";
+								if(element.firstname.length == 0 && element.lastname.length == 0 && element.email.length == 0 && element.phone.length == 0)
+									throw "leerer Kontakt vorhanden";
 								
-			// 				});
+							});
 
-			// 				contactService.importData(contactJson);
+							contactService.importData(contactJson);
+							$scope.contactList = contactService.getList();
+							$scope.$apply();
 								
-			// 			}catch(exception){
-			// 				alert("Kontakte konnten nicht geladen werden: " + exception);
-			// 			}
-			// 		}
-			// 	}
-			// 	reader.readAsText(files[0]);
-			// }
-			// dialog.click();
+						}catch(exception){
+							alert("Kontakte konnten nicht geladen werden: " + exception);
+						}
+					}
+				}
+				reader.readAsText(files[0]);
+			}
+			dialog.click();
 		}
 
 		$scope.reset = ()=>{
-			// if(confirm("Alle Daten werden beim zurücksetzen gelöscht. Fortfahren?")){
-			// 	contactService.reset();
-			// 	$scope.contactList = contactService.getList();
-			// }
+			if(confirm("Alle Daten werden beim zurücksetzen gelöscht. Fortfahren?")){
+				contactService.reset();
+				$scope.contactList = contactService.getList();
+			}
 		}
+
+		var init = ()=>{
+			var linkOverview = document.getElementById("link-overview")
+			var linkAdd = document.getElementById("link-add");
+
+			linkOverview.classList.add("active");
+			linkAdd.classList.remove("active");
+		}
+		init();
 	}]
 });

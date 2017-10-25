@@ -7,18 +7,26 @@ angular.module("contact").service("contactService", function () {
 		var lsList;
 		var lsId;
 
-		try {
+		if(localStorage.getItem("list") === null){
+			lsList = [];
+		}else{
 			lsList = JSON.parse(localStorage.getItem("list"));
-			lsId = Number.parseInt(localStorage.getItem("id"));
-		} catch (e) {
-			return;
+			if(!Array.isArray(lsList)){
+				lsList = [];
+			}
 		}
 
-		if (lsList !== null)
-			contactList = lsList;
+		if(localStorage.getItem("id") === null){
+			lsId = 1;
+		}else{
+			lsId = Number.parseInt(localStorage.getItem("id"));
+			if(lsId < 1){
+				lsId = 1;
+			}
+		}
 
-		if (lsId !== null)
-			contactId = lsId;
+		contactList = lsList;
+		contactId = lsId;
 	};
 
 	var saveLocalStorage = () => {
@@ -44,6 +52,8 @@ angular.module("contact").service("contactService", function () {
 	this.addContact = (contact) => {
 		contact.id = contactId++;
 		contactList.push(contact);
+		
+		saveLocalStorage();
 	};
 
 	this.updateContact = (contactId, updatedContact) => {
@@ -56,6 +66,8 @@ angular.module("contact").service("contactService", function () {
 
 		updatedContact.id = contactId;
 		contactList[index] = updatedContact;
+		
+		saveLocalStorage();
 	};
 
 	this.deleteContact = (contactId) => {
@@ -73,22 +85,37 @@ angular.module("contact").service("contactService", function () {
 		}
 
 		contactList = newList;
+		
+		saveLocalStorage();
 	};
 
 	this.exportData = ()=>{
+		var exportList = [];
+		contactList.forEach((contact)=>{
+			exportList.push({
+				firstname: contact.firstname,
+				lastname: contact.lastname,
+				phone: contact.phone,
+				email: contact.email
+			});
+		});
 		return {
 			contactId: contactId,
-			contactList: contactList
+			contactList: exportList
 		};
 	};
 
 	this.importData = (data)=>{
 		contactId = data.contactId;
 		contactList = data.contactList;
+		saveLocalStorage();
 	}
 
 	this.reset = ()=>{
 		contactList = [];
 		contactId = 1;
+		saveLocalStorage();
 	}
+
+	loadLocalStorage();
 });

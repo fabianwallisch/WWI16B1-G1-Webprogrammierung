@@ -63,6 +63,14 @@ angular.module("edit").component("edit", {
 				contactService.updateContact(contact.id, updatedContact);
 				$location.path("/");
 			}
+			var init = ()=>{
+				var linkOverview = document.getElementById("link-overview")
+				var linkAdd = document.getElementById("link-add");
+	
+				linkOverview.classList.remove("active");
+				linkAdd.classList.remove("active");
+			}
+			init();
 		}
 	]
 });
