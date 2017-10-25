@@ -23,19 +23,36 @@
 </head>
 
 <body ng-app="adressbuchApp">
-		<nav class="navbar navbar-expand navbar-light bg-light">
-			<div class="navbar-header">
-      <a class="navbar-brand" href="#">Adressbuch</a>
-    </div>
-			<div class="navbar-nav">
-				<a class="nav-item nav-link active" href="#!/"><span><img class="navbar-img" src="/img/people.svg" alt="people"> </span><span>Übersicht</span></a>
-				<a class="nav-item nav-link" href="#!/add"><span><img class="navbar-img" src="/img/plus.svg" alt="add">Adresse hinzufügen</a>
-			</div>
-		</nav>
+	<nav class="navbar navbar-expand navbar-light bg-light">
+		<div class="container">
+			<!-- <div class="navbar-header"> -->
+			<a class="navbar-brand" href="#">Adressbuch</a>
+			<!-- </div> -->
+			<!-- <div class="navbar-nav"> -->
+			<ul class="navbar-nav">
+				<li>
+					<a class="nav-item nav-link" href="#!/">
+						<span>
+							<img class="navbar-img" src="/img/people.svg" alt="people"> </span>
+						<span>Übersicht</span>
+					</a>
+				</li>
+				<li>
+					<a class="nav-item nav-link" href="#!/add">
+						<span>
+							<img class="navbar-img" src="/img/plus.svg" alt="add">
+						</span>
+						Adresse hinzufügen
+					</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
 
 	<main ng-view class="view container mt-3">
 	</main>
-	
+
 	<nav class="navbar fixed-bottom navbar-light bg-light">
 		<a class="nav-link nav-text-dark" href="https://www.heise.de/forum/heise-online/News-Kommentare/Firefox-39-entfernt-SSLv3-und-RC4/Emojis-nerven/thread-3738108/#posting_20966907">Initiative Gegen Emojis in Folien</a>
 		<a class="nav-link nav-text-dark" href="https://github.com/fabianwallisch/WWI16B1-G1-Webprogrammierung/tree/master/portfoliopruefung_02"
