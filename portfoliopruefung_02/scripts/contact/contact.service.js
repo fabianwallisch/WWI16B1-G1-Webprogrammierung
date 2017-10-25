@@ -3,8 +3,19 @@ angular.module("contact").service("contactService", function () {
 	var contactList = [];
 	var contactId = 1;
 
+	function lsTest(){
+		var test = 'test';
+		try {
+			localStorage.setItem(test, test);
+			localStorage.removeItem(test);
+			return true;
+		} catch(e) {
+			return false;
+		}
+	}
+
 	var loadLocalStorage = () => {
-		if(!window.localStorage)
+		if(!lsTest())
 			return;
 
 		var lsList;
@@ -33,7 +44,7 @@ angular.module("contact").service("contactService", function () {
 	};
 
 	var saveLocalStorage = () => {
-		if(!window.localStorage)
+		if(!lsTest())
 			return;
 		localStorage.setItem("list", JSON.stringify(contactList));
 		localStorage.setItem("id", contactId);
