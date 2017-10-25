@@ -1,5 +1,34 @@
 angular.module("list").component("list", {
-	templateUrl: "/scripts/list/list.template.html",
+	// templateUrl: "/scripts/list/list.template.html",
+	template: `
+	<h2>Übersicht</h2>
+	<p ng-show="contactList.length == 0" class="mt-3">Es sind noch keine Adressen vorhanden</p>
+	<table ng-show="contactList.length > 0" class="table table-striped mt-3">
+		<thead>
+			<tr>
+				<th>Vorname</th>
+				<th>Nachname</th>
+				<th>E-Mail</th>
+				<th>Telefon</th>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="contact in contactList | orderBy:'firstname'">
+				<td>{{contact.firstname}}</td>
+				<td>{{contact.lastname}}</td>
+				<td>{{contact.email}}</td>
+				<td>{{contact.phone}}</td>
+				<td><a ng-click="deleteContact(contact.id)"><span class="oi oi-trash"></span></a></td>
+				<td><a ng-href="#!/edit/{{contact.id}}"><span class="oi oi-pencil"></span></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- <button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
+	<button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="reset()">zurücksetzen</button>
+	<button class="btn btn-outline-primary" ng-click="import()">Kontakte importieren</button> -->
+	`,
 	controller: ['contactService', '$scope', (contactService, $scope) => {
 		$scope.contactList = contactService.getList();
 		$scope.deleteContact = (contactId)=>{
