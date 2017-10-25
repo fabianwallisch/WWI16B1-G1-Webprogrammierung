@@ -17,11 +17,11 @@
 			<td>{{contact.lastname}}</td>
 			<td>{{contact.email}}</td>
 			<td>{{contact.phone}}</td>
-			<td><a ng-click="deleteContact(contact.id)"><img class="list-img" src="\img\trash.svg" alt="delete"></a></td>
-			<td><a ng-href="#!/edit/{{contact.id}}"><img class="list-img" src="\img\pencil.svg" alt="edit"></a></td>
+			<td><a ng-click="deleteContact(contact.id)"><span class="oi oi-trash"></span></a></td>
+			<td><a ng-href="#!/edit/{{contact.id}}"><span class="oi oi-pencil"></span></a></td>
 		</tr>
 	</tbody>
 </table>
-<!-- <button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
-<button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="reset()">zurücksetzen</button>
-<button class="btn btn-outline-primary" ng-click="import()">Kontakte importieren</button> -->
+<button class="btn btn-outline-primary formularActions" ng-click="import()">Kontakte importieren</button>
+<button class="btn btn-outline-primary formularActions" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
+<button id="reset" ng-click="reset()" ng-show="contactList.length > 0" alt="Alle Adressen löschen" class="btn btn-outline-primary formularActions"><span class="oi oi-reload"></span></button>

@@ -25,18 +25,19 @@ angular.module("list").component("list", {
 			</tr>
 		</tbody>
 	</table>
-	<button ng-click="reset()" ng-show="contactList.length > 0" alt="Alle Adressen löschen" class="btn btn-outline-primary"><span class="oi oi-reload"></span></button>
-	<button class="btn btn-outline-primary" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
-	<button class="btn btn-outline-primary" ng-click="import()">Kontakte importieren</button>
+	<button class="btn btn-outline-primary formularActions" ng-click="import()">Kontakte importieren</button>
+	<button class="btn btn-outline-primary formularActions" ng-show="contactList.length > 0" ng-click="export()">Kontakte exportieren</button>
+	<button id="reset" ng-click="reset()" ng-show="contactList.length > 0" alt="Alle Adressen löschen" class="btn btn-outline-primary formularActions"><span class="oi oi-reload"></span></button>
+
 	`,
 	controller: ['contactService', '$scope', (contactService, $scope) => {
 		$scope.contactList = contactService.getList();
-		$scope.deleteContact = (contactId)=>{
+		$scope.deleteContact = (contactId) => {
 			contactService.deleteContact(contactId);
 			$scope.contactList = contactService.getList();
 		};
 
-		$scope.export = ()=>{
+		$scope.export = () => {
 			var link = document.createElement("a");
 			var dataString = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(contactService.exportData()));
 			console.log(dataString);
@@ -47,42 +48,42 @@ angular.module("list").component("list", {
 			document.body.removeChild(link);
 		};
 
-		$scope.import = ()=>{
-			if(!confirm("ungespeicherte Daten gehen bei dem Import einer Datei verloren")){
+		$scope.import = () => {
+			if (!confirm("ungespeicherte Daten gehen bei dem Import einer Datei verloren")) {
 				return;
 			}
 
 			var dialog = document.createElement("input");
 			dialog.setAttribute("type", "file");
 			dialog.setAttribute("accept", ".json, text/json");
-			dialog.onchange = (event)=>{
+			dialog.onchange = (event) => {
 				var files = dialog.files;
 				var reader = new FileReader();
-				reader.onloadend = (evt)=>{
-					if(evt.target.readyState == FileReader.DONE) {
-						try{
+				reader.onloadend = (evt) => {
+					if (evt.target.readyState == FileReader.DONE) {
+						try {
 							var contactJson = JSON.parse(evt.target.result);
 
-							if(!contactJson.contactId || ! contactJson.contactList)
+							if (!contactJson.contactId || !contactJson.contactList)
 								throw "JSON Format fehlerhaft";
-							
-							if(!Number.isInteger(contactJson.contactId) || contactJson.contactId < 1)
+
+							if (!Number.isInteger(contactJson.contactId) || contactJson.contactId < 1)
 								throw "contactId ist fehlerhaft";
 
-							contactJson.contactList.forEach((element)=>{
-								if(!element.firstname && !element.lastname && !element.email && !element.phone)
+							contactJson.contactList.forEach((element) => {
+								if (!element.firstname && !element.lastname && !element.email && !element.phone)
 									throw "leere Kontakte vorhanden";
-				
-								if(element.firstname.length == 0 && element.lastname.length == 0 && element.email.length == 0 && element.phone.length == 0)
+
+								if (element.firstname.length == 0 && element.lastname.length == 0 && element.email.length == 0 && element.phone.length == 0)
 									throw "leerer Kontakt vorhanden";
-								
+
 							});
 
 							contactService.importData(contactJson);
 							$scope.contactList = contactService.getList();
 							$scope.$apply();
-								
-						}catch(exception){
+
+						} catch (exception) {
 							alert("Kontakte konnten nicht geladen werden: " + exception);
 						}
 					}
@@ -92,14 +93,14 @@ angular.module("list").component("list", {
 			dialog.click();
 		}
 
-		$scope.reset = ()=>{
-			if(confirm("Alle Daten werden beim zurücksetzen gelöscht. Fortfahren?")){
+		$scope.reset = () => {
+			if (confirm("Alle Daten werden beim zurücksetzen gelöscht. Fortfahren?")) {
 				contactService.reset();
 				$scope.contactList = contactService.getList();
 			}
 		}
 
-		var init = ()=>{
+		var init = () => {
 			var linkOverview = document.getElementById("link-overview")
 			var linkAdd = document.getElementById("link-add");
 

@@ -27,18 +27,6 @@ body{
 
 }
 
-/* .navbar-nav {
-    display:table;
-    width:100%;
-    margin: 0;
-    font-size: x-large; 
-} */
-
-/* .navbar-nav > a {
-    padding-top:0px; 
-    padding-bottom:0px; 
-} */
-
 .navbar-img{
     height:15px; 
     padding-bottom: 3px; 
@@ -79,5 +67,9 @@ a{
 
 .input-Add{
     width: 100%;
+}
+
+#reset{
+    height: 38px; 
 }
 
