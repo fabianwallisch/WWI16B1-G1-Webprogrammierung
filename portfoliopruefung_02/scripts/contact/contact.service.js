@@ -4,6 +4,9 @@ angular.module("contact").service("contactService", function () {
 	var contactId = 1;
 
 	var loadLocalStorage = () => {
+		if(!window.localStorage)
+			return;
+
 		var lsList;
 		var lsId;
 
@@ -30,6 +33,8 @@ angular.module("contact").service("contactService", function () {
 	};
 
 	var saveLocalStorage = () => {
+		if(!window.localStorage)
+			return;
 		localStorage.setItem("list", JSON.stringify(contactList));
 		localStorage.setItem("id", contactId);
 	}
